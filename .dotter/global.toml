@@ -1,0 +1,16 @@
+[helpers]
+
+[default]
+depends = []
+
+[default.files]
+mpv = "~/scoop/persist/mpv/portable_config/"
+nushell = "~/AppData/Local/nushell/"
+nvim = "~/AppData/Local/nvim/"
+starship = "~/.config/"
+wezterm = "~"
+
+[default.variables]
+
+[settings]
+default_target_type = "automatic"

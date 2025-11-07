@@ -1,0 +1,34 @@
+add_newline = false
+
+[aws]
+symbol = "  "
+
+[git_branch]
+symbol = " "
+
+[git_commit]
+tag_symbol = '  '
+
+[memory_usage]
+symbol = "󰍛 "
+
+[package]
+disabled = true
+
+[python]
+format = "via [${symbol}${pyenv_prefix}(${version} )]($style)"
+symbol = " "
+style = "bold blue"
+python_binary = [".venv/bin/python", ".venv/Scripts/python"]
+
+[kotlin]
+disabled = true
+
+[custom.kotlin_gradle]
+command = "open gradle/libs.versions.toml | get versions.kotlin"
+format = "via [${symbol}(v$output )]($style)"
+symbol = "🅺 "  
+style = "bold blue"
+shell = ["nu"]
+detect_folders = [".kotlin"]
+
