@@ -3,7 +3,6 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        -- Pyright configuration
         pyright = {
           enabled = true,
           settings = {
@@ -12,12 +11,11 @@ return {
                 autoSearchPaths = true,
                 diagnosticMode = "workspace",
                 useLibraryCodeForTypes = true,
-                typeCheckingMode = "basic", -- Can be "off", "basic", or "strict"
+                typeCheckingMode = "basic",
               },
             },
           },
         },
-        -- Ruff LSP configuration
         ruff = {
           enabled = true,
           cmd_env = { RUFF_TRACE = "messages" },
@@ -31,7 +29,6 @@ return {
     },
   },
 
-  -- Configure none-ls with Ruff
   {
     "nvimtools/none-ls.nvim",
     optional = true,
@@ -39,17 +36,10 @@ return {
       local nls = require("null-ls")
       opts.sources = opts.sources or {}
 
-      -- Add Ruff for formatting and linting via none-ls
       vim.list_extend(opts.sources, {
-        -- Ruff linting
         nls.builtins.diagnostics.ruff.with({
-          extra_args = { "--extend-select", "I" }, -- Enable import sorting
+          extra_args = { "--extend-select", "I" },
         }),
-        -- Ruff formatting
-        nls.builtins.formatting.ruff.with({
-          extra_args = { "--line-length", "88" }, -- Match Black's default
-        }),
-        -- Optional: Add Ruff for import sorting
         nls.builtins.formatting.ruff_format,
       })
 
@@ -57,7 +47,6 @@ return {
     end,
   },
 
-  -- Configure Mason to ensure tools are installed
   {
     "mason-org/mason.nvim",
     opts = {
@@ -65,12 +54,11 @@ return {
         "pyright",
         "ruff",
         "ruff-lsp",
-        "debugpy", -- For debugging
+        "debugpy",
       },
     },
   },
 
-  -- Optional: Configure format on save
   {
     "stevearc/conform.nvim",
     optional = true,
@@ -81,7 +69,6 @@ return {
     },
   },
 
-  -- Optional: Configure nvim-lint
   {
     "mfussenegger/nvim-lint",
     optional = true,
