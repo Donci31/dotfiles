@@ -30,13 +30,13 @@ def e [] {
   podman exec -it -w /workspaces/($env.PWD | path basename) lazyglue nu -c "overlay use .venv/bin/activate.nu ; nu -i"
 }
 
-if ($nu.os-info.name == "windows" and $env.PODMAN) {
-  s ; e
-}
-
 source ($nu.cache-dir)/carapace.nu
 source ($nu.cache-dir)/zoxide.nu
 source ($nu.cache-dir)/starship.nu
 source ($nu.cache-dir)/uv.nu
 source ~/.local/share/atuin/init.nu
+
+if ($nu.os-info.name == "windows" and $env.PODMAN) {
+  s ; e
+}
 
