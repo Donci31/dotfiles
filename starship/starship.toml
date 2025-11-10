@@ -13,6 +13,9 @@ symbol = " "
 [c]
 symbol = " "
 
+[container]
+disabled = true
+
 [cpp]
 symbol = " "
 
