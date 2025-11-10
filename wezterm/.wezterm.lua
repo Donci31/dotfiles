@@ -10,7 +10,7 @@ wezterm.on("gui-startup", function(cmd)
 	end
 end)
 
-config.default_cwd = "D:/BME_cuccok/MSC-3-Felev/dipterv"
+config.default_cwd = os.getenv("WEZTERM_CWD") or wezterm.home_dir
 config.default_prog = { "nu" }
 
 config.disable_default_mouse_bindings = false
