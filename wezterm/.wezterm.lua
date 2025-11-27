@@ -10,7 +10,6 @@ wezterm.on("gui-startup", function(cmd)
 	end
 end)
 
-config.default_cwd = os.getenv("WEZTERM_CWD") or wezterm.home_dir
 config.default_prog = { "nu" }
 
 config.disable_default_mouse_bindings = false
@@ -30,18 +29,5 @@ config.colors = {
 
 config.window_decorations = "RESIZE"
 config.enable_tab_bar = false
-
-config.keys = {
-	{
-		key = "f",
-		mods = "CTRL",
-		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = "f",
-		mods = "CTRL|SHIFT",
-		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-	},
-}
 
 return config
