@@ -1,0 +1,12 @@
+[opener]
+play = [
+    { run = 'mpv %*', orphan = true, for = "windows" }
+]
+
+edit = [
+    { run = 'nvim %*', block = true, for = "windows" }
+]
+
+open = [
+    { run = 'start "" %*', orphan = true, for = "windows" }
+]

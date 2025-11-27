@@ -10,6 +10,7 @@ nvim = "~/AppData/Local/nvim/"
 pgcli = "~/AppData/Local/dbcli/pgcli/"
 starship = "~/.config/"
 wezterm = "~"
+yazi = "~/AppData/Roaming/yazi/config/"
 
 [default.variables]
 
