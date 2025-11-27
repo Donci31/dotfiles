@@ -27,8 +27,7 @@ def nu-aws-jobs-runs [job_name: string, max_results?: int ] {
 }
 
 def nu-aws-ls [folder?: string] {
-  let common_base: string = $"($env.DATA_OWNER)-($env.PROJECT_NAME)"
-  let base_path: string = $"s3://($env.PROJECT_ENV)-($aws_env)-($region)-($common_base)"
+  let base_path: string = $"s3://($env.PROJECT_ENV)-($aws_env)-($region)-($env.DATA_OWNER)-($env.PROJECT_NAME)"
   let s3_path: string = if $folder != null { $"($base_path)/($folder)/" } else { $base_path }
 
   aws s3 ls $s3_path --recursive --human-readable
