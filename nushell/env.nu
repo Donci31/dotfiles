@@ -18,3 +18,7 @@ uv generate-shell-completion nushell | save -f ($nu.cache-dir)/uv.nu
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
 
+if $nu.os-info.name == "linux" and $env.PODMAN {
+  mkdir ~/.local/share/atuin/
+  atuin init nu | save ~/.local/share/atuin/init.nu
+}
