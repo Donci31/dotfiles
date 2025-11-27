@@ -5,7 +5,7 @@ depends = []
 
 [default.files]
 mpv = "~/scoop/persist/mpv/portable_config/"
-nushell = "~/AppData/Local/nushell/"
+nushell = "~/AppData/Roaming/nushell/"
 nvim = "~/AppData/Local/nvim/"
 starship = "~/.config/"
 wezterm = "~"
