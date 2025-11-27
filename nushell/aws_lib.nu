@@ -37,7 +37,7 @@ def nu-aws-ls [folder?: string] {
   | update column2 {|row| $"($row.column2) ($row.column3)" }
   | select column0 column2 column4
   | rename modified-date file-size aws-s3-path
-  | update aws-s3-path {|row| $"s3://($env.PROJECT_ENVIRONMENT)-($aws_env)-($region)-($common_base)/($row.aws-s3-path)" }
+  | update aws-s3-path {|row| $"($base_path)/($row.aws-s3-path)" }
 }
 
 def nu-aws-get-secrets [secret_id : string] {

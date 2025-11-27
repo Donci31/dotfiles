@@ -1,6 +1,8 @@
 def clg [] {
+  let devcontainer_file = $"($env.REPO_PATH)/($env.GLUE_REPO)/.devcontainer/devcontainer.env"
+
   let hosts = (
-    open $"($env.REPO_PATH)/($env.GLUE_REPO)/.devcontainer/devcontainer.env"
+    open $devcontainer_file
     | lines
     | parse "{key}={value}"
     | where key =~ 'SSH_.*_REDSHIFT'
@@ -12,11 +14,11 @@ def clg [] {
     podman run -it
     --name=lazyglue
     --userns=keep-id:uid=10000,gid=10000
-    --env-file $"($env.REPO_PATH)/($env.GLUE_REPO)/.devcontainer/devcontainer.env"
+    --env-file $devcontainer_file
     ...$hosts
     -v $"($env.REPO_PATH)/($env.GLUE_REPO):/workspaces/($env.GLUE_REPO)"
     -v $"($env.REPO_PATH)/($env.SQL_REPO):/workspaces/($env.SQL_REPO)"
-    -v $"($env.REPO_PATH)/($env.STEP_FN_REPO):/workspaces/($env.SQL_REPO)"
+    -v $"($env.REPO_PATH)/($env.STEP_FN_REPO):/workspaces/($env.STEP_FN_REPO)"
     -v $"($env.USERPROFILE)/.aws:/home/hadoop/.aws"
     -v $"($env.USERPROFILE)/.gitconfig:/home/hadoop/.gitconfig"
     -v $"($env.USERPROFILE)/.config/starship.toml:/home/hadoop/.config/starship.toml"
@@ -41,11 +43,21 @@ def Slg [] {
 }
 
 def elg [] {
+  let activate_venv = r#'
+    if ('.venv' | path exists) {
+      overlay use .venv/bin/activate.nu
+      nu -i
+    } else {
+      nu -i
+    }
+  '#
+
   (
     podman exec -it
-    -e AWS_PROFILE=($env.AWS_PROFILE)
-    -w /workspaces/($env.GLUE_REPO)
-    lazyglue nu -c "overlay use .venv/bin/activate.nu ; nu -i"
+      -e AWS_PROFILE=($env.AWS_PROFILE)
+      -w /workspaces/($env.GLUE_REPO)
+      lazyglue
+      nu -c $activate_venv
   )
 }
 
