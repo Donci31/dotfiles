@@ -63,6 +63,6 @@ def dlg [] {
   podman rm lazyglue
 }
 
-if ($nu.os-info.name == "windows" and $env.PODMAN) {
+if ($nu.os-info.name == "windows" and $env.LAZYGLUE) {
   slg ; elg
 }

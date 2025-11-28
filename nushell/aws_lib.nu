@@ -1,14 +1,11 @@
-let aws_profile = $env.AWS_PROFILE
-let parts = ($aws_profile | split row "-")
-let aws_region_prefix = $parts.0
-let aws_env = $parts.1
+let aws_profile_parts = ($env.AWS_PROFILE | split row "-")
+let aws_region_prefix = $aws_profile_parts.0
+let aws_env = $aws_profile_parts.1
 
-let region = if $aws_region_prefix == "eu" {
-    $env.EU_REGION
-} else if $aws_region_prefix == "us" {
-    $env.US_REGION
-} else {
-    error make { msg: $"Unknown region prefix: ($aws_region_prefix)" }
+let region = match $aws_region_prefix {
+    "eu" => $env.EU_REGION
+    "us" => $env.US_REGION
+    _    => (error make { msg: $"Unknown region prefix: ($aws_region_prefix)" })
 }
 
 def nu-aws-jobs-runs [job_name: string, max_results?: int ] {

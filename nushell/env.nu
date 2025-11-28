@@ -1,4 +1,4 @@
-$env.PODMAN = false
+$env.LAZYGLUE = false
 $env.EDITOR = "nvim"
 $env.STARSHIP_LOG = "error"
 $env.PGCLIENTENCODING = "utf-8"
@@ -18,7 +18,10 @@ uv generate-shell-completion nushell | save -f ($nu.cache-dir)/uv.nu
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
 
-if $nu.os-info.name == "linux" and $env.PODMAN {
+if $nu.os-info.name == "linux" and $env.LAZYGLUE {
   mkdir ~/.local/share/atuin/
-  atuin init nu | save ~/.local/share/atuin/init.nu
+  atuin init nu | save -f ~/.local/share/atuin/init.nu
+} else {
+  mkdir ~/.local/share/atuin/
+  touch ~/.local/share/atuin/init.nu
 }

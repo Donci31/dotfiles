@@ -1,12 +1,6 @@
 [opener]
-play = [
-    { run = 'mpv %*', orphan = true, for = "windows" }
-]
+play = [{ run = 'mpv %*', orphan = true }]
 
-edit = [
-    { run = 'nvim %*', block = true, for = "windows" }
-]
+edit = [{ run = 'nvim %*', block = true }]
 
-open = [
-    { run = 'start "" %*', orphan = true, for = "windows" }
-]
+open = [{ run = 'start "" %*', orphan = true }]

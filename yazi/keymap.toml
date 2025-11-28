@@ -1,4 +1,4 @@
 [mgr]
 prepend_keymap = [
-  { on = "<C-o>", run = "shell --orphan 'mpv %*'", desc = "Open in MPV" }
+  { on = "<C-o>", run = "shell --orphan 'mpv %*'", desc = "Open in MPV" },
 ]
