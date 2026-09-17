@@ -23,8 +23,12 @@ This repository contains configuration files for:
 │   └── local.toml    # Local machine-specific settings (gitignored)
 ├── mpv/              # MPV media player configuration
 ├── nushell/          # Nushell shell configuration
-│   ├── config.nu     # Main Nushell config
-│   ├── env.nu        # Environment variables
+│   ├── windows/      # Windows configuration (Dotter deploy)
+│   │   ├── config.nu
+│   │   └── env.nu
+│   ├── nix/          # NixOS / Home Manager configuration
+│   │   ├── config.nu
+│   │   └── env.nu
 │   ├── aws_lib.nu    # AWS-related utilities
 │   └── lazyglue.nu   # Custom utilities
 ├── nvim/             # Neovim configuration (LazyVim)

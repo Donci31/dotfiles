@@ -26,4 +26,3 @@ source ($nu.cache-dir)/zoxide.nu
 source ($nu.cache-dir)/starship.nu
 source ($nu.cache-dir)/uv.nu
 source ($nu.cache-dir)/extra.nu
-source ~/.local/share/atuin/init.nu

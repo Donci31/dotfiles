@@ -25,11 +25,3 @@ if ($extra_src | path exists) {
 
 mkdir ($nu.data-dir | path join "vendor/autoload")
 try { starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu") }
-
-let atuin_dir = ("~/.local/share/atuin" | path expand)
-mkdir $atuin_dir
-if $nu.os-info.name == "linux" and (($env.LAZYGLUE? | default "false") in ["true", true, 1, "1"]) {
-  try { atuin init nu | save -f ($atuin_dir | path join "init.nu") } catch { touch ($atuin_dir | path join "init.nu") }
-} else {
-  touch ($atuin_dir | path join "init.nu")
-}

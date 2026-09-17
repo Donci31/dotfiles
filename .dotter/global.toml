@@ -5,7 +5,10 @@ depends = []
 
 [default.files]
 mpv = "~/scoop/persist/mpv/portable_config/"
-nushell = "~/AppData/Roaming/nushell/"
+"nushell/windows/config.nu" = "~/AppData/Roaming/nushell/config.nu"
+"nushell/windows/env.nu" = "~/AppData/Roaming/nushell/env.nu"
+"nushell/aws_lib.nu" = "~/AppData/Roaming/nushell/aws_lib.nu"
+"nushell/lazyglue.nu" = "~/AppData/Roaming/nushell/lazyglue.nu"
 nvim = "~/AppData/Local/nvim/"
 pgcli = "~/AppData/Local/dbcli/pgcli/"
 starship = "~/.config/"
@@ -18,7 +21,10 @@ yazi = "~/AppData/Roaming/yazi/config/"
 depends = []
 
 [linux.files]
-nushell = "~/.config/nushell/"
+"nushell/nix/config.nu" = "~/.config/nushell/config.nu"
+"nushell/nix/env.nu" = "~/.config/nushell/env.nu"
+"nushell/aws_lib.nu" = "~/.config/nushell/aws_lib.nu"
+"nushell/lazyglue.nu" = "~/.config/nushell/lazyglue.nu"
 nvim = "~/.config/nvim/"
 pgcli = "~/.config/pgcli/"
 starship = "~/.config/"
