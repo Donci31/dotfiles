@@ -10,7 +10,4 @@ source ($nu.default-config-dir)/lazyglue.nu
 source ($nu.default-config-dir)/aws_lib.nu
 
 # Optional user extensions
-let extra_nu = ($nu.default-config-dir | path join "extra.nu")
-if ($extra_nu | path exists) {
-  source $extra_nu
-}
+source ($nu.cache-dir)/extra.nu
