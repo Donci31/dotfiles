@@ -1,14 +1,23 @@
-let aws_profile_parts = ($env.AWS_PROFILE | split row "-")
-let aws_region_prefix = $aws_profile_parts.0
-let aws_env = $aws_profile_parts.1
-
-let region = match $aws_region_prefix {
-    "eu" => $env.EU_REGION
-    "us" => $env.US_REGION
-    _    => (error make { msg: $"Unknown region prefix: ($aws_region_prefix)" })
+# Helper to resolve active AWS context safely without throwing if env vars are unset
+def get-aws-context [] {
+  let profile = ($env.AWS_PROFILE? | default "eu-dev")
+  let parts = ($profile | split row "-")
+  let prefix = ($parts | get -o 0 | default "eu")
+  let env_name = ($parts | get -o 1 | default "dev")
+  let region = match $prefix {
+    "eu" => ($env.EU_REGION? | default "eu-central-1")
+    "us" => ($env.US_REGION? | default "us-east-1")
+    $other => ($env.AWS_REGION? | default $other)
+  }
+  {
+    profile: $profile,
+    prefix: $prefix,
+    env: $env_name,
+    region: $region
+  }
 }
 
-def nu-aws-jobs-runs [job_name: string, max_results?: int ] {
+def nu-aws-jobs-runs [job_name: string, max_results?: int] {
   aws glue get-job-runs --job-name $job_name --max-results ($max_results | default 55)
   | from json
   | get JobRuns
@@ -24,7 +33,11 @@ def nu-aws-jobs-runs [job_name: string, max_results?: int ] {
 }
 
 def nu-aws-ls [folder?: string] {
-  let base_path: string = $"s3://($env.PROJECT_ENV)-($aws_env)-($region)-($env.DATA_OWNER)-($env.PROJECT_NAME)"
+  let ctx = (get-aws-context)
+  let project_env = ($env.PROJECT_ENV? | default "dev")
+  let data_owner = ($env.DATA_OWNER? | default "")
+  let project_name = ($env.PROJECT_NAME? | default "")
+  let base_path: string = $"s3://($project_env)-($ctx.env)-($ctx.region)-($data_owner)-($project_name)"
   let s3_path: string = if $folder != null { $"($base_path)/($folder)/" } else { $base_path }
 
   aws s3 ls $s3_path --recursive --human-readable
@@ -36,10 +49,9 @@ def nu-aws-ls [folder?: string] {
   | update aws-s3-path {|row| $"($base_path)/($row.aws-s3-path)" }
 }
 
-def nu-aws-get-secrets [secret_id : string] {
+def nu-aws-get-secrets [secret_id: string] {
   aws secretsmanager get-secret-value --secret-id $secret_id 
   | from json 
   | get SecretString
   | from json
 }
- 

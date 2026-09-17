@@ -3,9 +3,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        pyrefly = {
-          enabled = true,
-        },
+        ty = {},
         ruff = {
           enabled = true,
           cmd_env = { RUFF_TRACE = "messages" },
@@ -22,7 +20,6 @@ return {
     "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
-        "pyrefly",
         "ruff",
         "debugpy",
       },

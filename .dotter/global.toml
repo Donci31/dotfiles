@@ -14,5 +14,18 @@ yazi = "~/AppData/Roaming/yazi/config/"
 
 [default.variables]
 
+[linux]
+depends = []
+
+[linux.files]
+nushell = "~/.config/nushell/"
+nvim = "~/.config/nvim/"
+pgcli = "~/.config/pgcli/"
+starship = "~/.config/"
+yazi = "~/.config/yazi/"
+
+[linux.variables]
+
 [settings]
 default_target_type = "automatic"
+
