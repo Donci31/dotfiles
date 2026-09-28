@@ -1,6 +1,15 @@
 [opener]
-play = [{ run = 'mpv %*', orphan = true }]
+play = [
+	{ run = 'mpv %s', orphan = true, desc = "Play" },
+]
+edit = [
+	{ run = 'nvim %s', block = true, desc = "Edit" },
+]
+open = [
+	{ run = 'start "" %s1', orphan = true, desc = "Open" },
+]
 
-edit = [{ run = 'nvim %*', block = true }]
-
-open = [{ run = 'start "" %*', orphan = true }]
+[open]
+prepend_rules = [
+	{ url = "*.{mp4,mkv,avi,mov,webm,flv,wmv,m4v,ts,mpg,mpeg}", use = [ "play", "reveal" ] },
+]
