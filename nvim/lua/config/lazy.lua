@@ -15,6 +15,24 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  lockfile = (function()
+    local config_lock = vim.fn.stdpath("config") .. "/lazy-lock.json"
+    local config_dir = vim.fn.stdpath("config")
+    if vim.fn.filewritable(config_lock) == 1 or (vim.fn.filereadable(config_lock) == 0 and vim.fn.filewritable(config_dir) == 2) then
+      return config_lock
+    end
+    local state_dir = vim.fn.stdpath("state")
+    if vim.fn.isdirectory(state_dir) == 0 then
+      vim.fn.mkdir(state_dir, "p")
+    end
+    local state_lock = state_dir .. "/lazy-lock.json"
+    if vim.fn.filereadable(state_lock) == 0 and vim.fn.filereadable(config_lock) == 1 then
+      pcall(function()
+        vim.fn.writefile(vim.fn.readfile(config_lock), state_lock)
+      end)
+    end
+    return state_lock
+  end)(),
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
